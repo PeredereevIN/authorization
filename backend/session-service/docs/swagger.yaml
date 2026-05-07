@@ -1,0 +1,87 @@
+openapi: 3.0.0
+info:
+  title: Session Service API
+  version: 1.0.0
+  description: API documentation for the Session Service
+servers:
+  - url: http://localhost:8003
+paths:
+  /session/all:
+    get:
+      summary: Get all sessions
+      responses:
+        '200':
+          description: Successfully retrieved all sessions
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  sessions:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        userId:
+                          type: string
+                        createdAt:
+                          type: string
+                          format: date-time
+
+  /session/{id}:
+    get:
+      summary: Get a session by ID
+      parameters:
+        - in: path
+          name: id
+          required: false
+          description: The ID of the session to retrieve
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully retrieved the session
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  session:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      userId:
+                        type: string
+                      createdAt:
+                        type: string
+                        format: date-time
+
+  /session/logout:
+    post:
+      summary: Log out a user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: string
+      responses:
+        '200':
+          description: User logged out successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string

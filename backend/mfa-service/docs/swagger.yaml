@@ -1,0 +1,140 @@
+openapi: 3.0.0
+info:
+  title: MFA Service API
+  version: 1.0.0
+  description: API documentation for the MFA (Multi-Factor Authentication) Service
+servers:
+  - url: http://localhost:8002/api/v1/mfa
+
+paths:
+  /setup:
+    get:
+      summary: Generate MFA setup
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: MFA setup generated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: MFA setup generated successfully
+                  qrCodeUrl:
+                    type: string
+                    example: otpauth://totp/MyApp:username?secret=ABCDEF123456&issuer=MyApp
+                  secret:
+                    type: string
+                    example: ABCDEF123456
+
+  /verify:
+    post:
+      summary: Verify MFA setup
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+                  example: "123456"
+      responses:
+        "200":
+          description: MFA setup verified
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: MFA successfully verified
+        "400":
+          description: Invalid token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Invalid MFA token
+
+  /revoke:
+    put:
+      summary: Revoke MFA
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: MFA revoked
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: MFA has been disabled
+        "403":
+          description: MFA is not enabled
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: MFA is not currently enabled
+
+  /verify-login:
+    post:
+      summary: Verify MFA for login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: string
+                  example: "user-123"
+                token:
+                  type: string
+                  example: "654321"
+      responses:
+        "200":
+          description: MFA login verified
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: MFA login verification successful
+        "401":
+          description: Invalid credentials or token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Invalid MFA token
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

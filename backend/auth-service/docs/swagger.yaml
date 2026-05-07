@@ -1,0 +1,229 @@
+openapi: 3.0.0
+info:
+  title: Auth Service API
+  version: 1.0.0
+  description: API documentation for the Auth Service
+
+servers:
+  - url: http://localhost:8001/api/v1/auth
+
+paths:
+  /register:
+    post:
+      summary: Register a new user
+      parameters:
+        - $ref: "#/components/parameters/ip"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - password
+              properties:
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                  format: password
+      responses:
+        "200":
+          description: User registered successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: User registered successfully
+
+  /login:
+    post:
+      summary: User login
+      parameters:
+        - $ref: "#/components/parameters/ip"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - password
+              properties:
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+      responses:
+        "200":
+          description: User logged in successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accessToken:
+                    type: string
+                  refreshToken:
+                    type: string
+                  message:
+                    type: string
+                    example: User logged in successfully
+
+  /verify/email:
+    post:
+      summary: Verify user email
+      parameters:
+        - $ref: "#/components/parameters/ip"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - code
+              properties:
+                email:
+                  type: string
+                  format: email
+                code:
+                  type: string
+      responses:
+        "200":
+          description: Email verified successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Email verified successfully
+
+  /password/forgot:
+    post:
+      summary: Request password reset
+      parameters:
+        - $ref: "#/components/parameters/ip"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+              properties:
+                email:
+                  type: string
+                  format: email
+      responses:
+        "200":
+          description: Password reset email sent
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Password reset email sent
+
+  /password/reset:
+    post:
+      summary: Reset user password
+      parameters:
+        - $ref: "#/components/parameters/ip"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - token
+                - newPassword
+              properties:
+                token:
+                  type: string
+                newPassword:
+                  type: string
+                  format: password
+      responses:
+        "200":
+          description: Password reset successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Password reset successfully
+
+  /logout:
+    post:
+      summary: Logout user
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/ip"
+      responses:
+        "200":
+          description: User logged out successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: User logged out successfully
+
+  /refresh:
+    get:
+      summary: Refresh authentication token
+      parameters:
+        - $ref: "#/components/parameters/ip"
+      responses:
+        "200":
+          description: Token refreshed successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accessToken:
+                    type: string
+                  refreshToken:
+                    type: string
+                  message:
+                    type: string
+                    example: Token refreshed successfully
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  parameters:
+    ip:
+      name: ip
+      in: query
+      description: IP address of the client
+      required: false
+      schema:
+        type: string
+        format: ipv4
+        example: 192.168.1.100
