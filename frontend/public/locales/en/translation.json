@@ -1,0 +1,95 @@
+{
+  "nav": {
+    "brand": "EduPlatform",
+    "signup": "Sign Up",
+    "selectLanguage": "Select language"
+  },
+  "hero": {
+    "title": "Open your own online educational institution with us",
+    "description": "A complete set of tools to create, manage, and grow your educational business.",
+    "getStarted": "Get Started for Free"
+  },
+  "features": {
+    "title": "Why choose us",
+    "items": [
+      {
+        "title": "Flexible course management",
+        "description": "Create and manage courses easily with an intuitive interface."
+      },
+      {
+        "title": "Analytics and reports",
+        "description": "Track student progress and course effectiveness with detailed reports."
+      },
+      {
+        "title": "Support and community",
+        "description": "Get help and share experiences with other educational institutions."
+      },
+      {
+        "title": "Mobile app",
+        "description": "Access your courses and materials anytime, anywhere via our mobile app."
+      },
+      {
+        "title": "Payment system integration",
+        "description": "Provide convenient and secure payment methods for your students with popular payment system integrations."
+      },
+      {
+        "title": "Multi-language support",
+        "description": "Expand your audience by offering courses and materials in multiple languages."
+      }
+    ]
+  },
+  "testimonials": {
+    "title": "Our users' feedback",
+    "items": [
+      {
+        "name": "Anna Ivanova",
+        "feedback": "The platform helped me quickly and easily open my own online educational institution.",
+        "rating": 5
+      },
+      {
+        "name": "Ivan Petrov",
+        "feedback": "User-friendly interface and powerful tools for managing courses and students.",
+        "rating": 4
+      },
+      {
+        "name": "Elena Smirnova",
+        "feedback": "Great support and many opportunities to grow my educational business.",
+        "rating": 5
+      }
+    ]
+  },
+  "callToAction": {
+    "ready": "Ready to get started?",
+    "join": "Join thousands of successful educational institutions today.",
+    "startFree": "Get Started for Free",
+    "contactUs": "Contact Us"
+  },
+  "roadmap": {
+    "title": "Development Roadmap",
+    "steps": [
+      {
+        "title": "Platform launch",
+        "description": "Create basic functionality for course and student management."
+      },
+      {
+        "title": "Mobile app",
+        "description": "Develop a mobile app for on-the-go course access."
+      },
+      {
+        "title": "Payment integration",
+        "description": "Provide convenient and secure payment methods for users."
+      },
+      {
+        "title": "Multi-language support",
+        "description": "Expand audience by supporting multiple languages."
+      },
+      {
+        "title": "Feature expansion",
+        "description": "Add new features and improve user experience."
+      }
+    ]
+  },
+  "footer": {
+    "copyright": "© {{year}} EduPlatform. All rights reserved."
+  }
+}
